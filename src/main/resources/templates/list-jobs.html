@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org/">
 <head th:replace="~{fragments :: head}">
 
+  <link th:href="@{/css/bootstrap.css}" rel="stylesheet" />
   <link th:href="@{/css/job-listing.css}" rel="stylesheet" />
 
 
@@ -9,29 +10,38 @@
 <body>
 
 <div th:replace="~{fragments :: page-header}"></div>
+<h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
-<div class="container body-content">
+<div th:fragment="displayJobs" class="container body-content">
 
-  <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+  <table class="table.job-listing" th:each="job : ${jobs}" >
+    <tr>
+      <td>ID</td>
+      <td th:text="${job.id}"></td>
+    </tr>
+    <tr>
+      <td>Name</td>
+      <td th:text="${job.name}"></td>
+    </tr>
+    <tr>
+      <td>Employer</td>
+      <td th:text="${job.employer}"></td>
+    </tr>
+    <tr>
+      <td>Location</td>
+      <td th:text="${job.location}"></td>
+    </tr>
+    <tr>
+      <td>Position Type</td>
+      <td th:text="${job.positionType}"></td>
+    </tr>
+    <tr>
+    <td>Skill</td>
+      <td th:text="${job.coreCompetency}"></td>
+    </tr>
+<!--    <br>-->
+  </table>
 
-<table class="table.job-listing">
-  <thead>
-  <tr>
-    <th>Employer</th>
-    <th>Location</th>
-    <th>Position Type</th>
-    <th>Skill</th>
-
-  </tr>
-  </thead>
-  <tr th:each="job : ${jobs}">
-    <td th:text="${job.employer}"></td>
-    <td th:text="${job.location}"></td>
-    <td th:text="${job.positionType}"></td>
-    <td th:text="${job.coreCompetency}"></td>
-  </tr>
-</table>
 </div>
-
 </body>
 </html>
